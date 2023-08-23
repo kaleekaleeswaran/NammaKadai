@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+    <title>Namma Kadai</title>
+    <script>
+        
+        var promptMessage = "{{ prompt_message }}";
+        
+        if (promptMessage) {
+          alert(promptMessage);
+        }
+      </script>
+</head>
+<body>
+    <div class="navbar">
+        <img id="index"src="../static/profile.png" alt="user" class="icon"><h4>{{ username }}</h4>
+        <div class="options">
+            <ul>
+                <li><a id="o0">Cash Balance: Rs. {{ cash_balance }}</a></li>
+                <li><a href="/index">Home</a></li>
+                <li><a href="/history">Transactions</a></li>
+                <li><a href="/purchase">Purchase</a></li>
+                <li><a href="/sales">Sales</a></li>
+                <li><a href="/storage">Storage</a></li>
+                <li><a href="/money">Add Money</a></li>
+                <li><a href="/logout">logout</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="sbox">
+        <h3>Sell</h3>
+        <form action="/sales" method="post">
+           <labe>Select product:</labe> <select name="item" id="ss">
+                {% for item in items %}
+                <option value="{{ item[0] }}">{{ item[1] }}</option>
+                {% endfor %}
+            </select>
+           <label>Enter Quantity:</label> <input id="sqty" min="0" type="number" name="qty" placeholder="Quantity" required>
+            <br>
+            <label>Enter Rate:</label><input id="srate" min="0" type="number" step="0.01" name="rate" placeholder="Rate" required>
+            <br>
+            <button id="sbut" type="submit">Sell</button>
+        </form>
+    </div>
+</body>
+</html>

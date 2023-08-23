@@ -1,0 +1,66 @@
+CREATE TABLE `company` (
+  `company_name` varchar(255) NOT NULL,
+  `cash_balance` float DEFAULT NULL,
+  PRIMARY KEY (`company_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `company` WRITE;
+INSERT INTO `company` VALUES ('Namma Kadai',1135);
+UNLOCK TABLES;
+
+
+
+CREATE TABLE `item` (
+  `item_id` varchar(255) NOT NULL,
+  `item_name` varchar(255) DEFAULT NULL,
+  `qty` int DEFAULT '0',
+  PRIMARY KEY (`item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `item` WRITE;
+INSERT INTO `item` VALUES ('PRO001','chair',1),('PRO002','ball',0),('PRO003','pen',0);
+UNLOCK TABLES;
+
+
+CREATE TABLE `purchase` (
+  `purchase_id` varchar(45) DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `item_id` varchar(255) DEFAULT NULL,
+  `qty` int DEFAULT NULL,
+  `rate` float DEFAULT NULL,
+  `amount` float DEFAULT NULL,
+  KEY `item_id` (`item_id`),
+  CONSTRAINT `purchase_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `purchase` WRITE;
+INSERT INTO `purchase` VALUES ('P001','2023-08-23 10:13:27','PRO001',10,10,100);
+UNLOCK TABLES;
+
+
+CREATE TABLE `sales` (
+  `sales_id` varchar(45) DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `item_id` varchar(255) DEFAULT NULL,
+  `qty` int DEFAULT NULL,
+  `rate` float DEFAULT NULL,
+  `amount` float DEFAULT NULL,
+  KEY `item_id` (`item_id`),
+  CONSTRAINT `sales_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `item` (`item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `sales` WRITE;
+INSERT INTO `sales` VALUES ('S001','2023-08-23 10:14:28','PRO001',9,15,135);
+UNLOCK TABLES;
+
+
+CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+LOCK TABLES `users` WRITE;
+INSERT INTO `users` VALUES (1,'admin','admin');
+UNLOCK TABLES;
