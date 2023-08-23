@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
+ 
+    <title>Namma Kadai</title>
+   <style> .random-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    .random-table th,
+    .random-table td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+    }
+</style>
+</head>
+<body>
+    <div class="navbar">
+        <img id="index"src="../static/profile.png" alt="user" class="icon"><h4>{{ username }}</h4>
+        <div class="options">
+            <ul>
+                <li><a class="random-link" id="o0">Cash Balance: Rs. {{ cash_balance }}</a></li>
+                <li><a href="/index" class="random-link">Home</a></li>
+                <li><a href="/history" class="random-link">Transactions</a></li>
+                <li><a href="/purchase" class="random-link">Purchase</a></li>
+                <li><a href="/sales">Sales</a></li>
+                <li><a href="/storage" class="random-link">Storage</a></li>
+                <li><a href="/money">Add Money</a></li>
+                <li><a href="/logout">logout</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="stbox">
+    <h3 class="random-heading">Item Management</h3>
+    
+    <h3 >Add Item</h3>
+    <form method="post" action="/storage">
+        <input  type="hidden" name="action" value="add">
+        Item Name: <input class="random-subheading" type="text" name="item_name" required><br>
+        <button class="random-button" type="submit">Add Item</button>
+    </form>
+    
+    <h3 >Remove Item</h3>
+    <form method="post" action="/storage">
+        <input type="hidden" name="action" value="remove">
+        Item Name: <input class="random-subheading" type="text" name="item_name" required><br>
+        <button class="random-button" type="submit">Remove Item</button>
+    </form>
+    
+    <h3>Item List</h3>
+    <table class="random-table">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Quantity Available</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[2] }} available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
